@@ -238,8 +238,10 @@ namespace awsiotsdk {
             }
 
             util::String client_id_tagged = ConfigCommon::base_client_id_;
+#if RANDOM_CLIENT_ID
             client_id_tagged.append("_pub_sub_tester_");
             client_id_tagged.append(std::to_string(rand()));
+#endif
             std::unique_ptr<Utf8String> client_id = Utf8String::Create(client_id_tagged);
 
             rc = p_iot_client_->Connect(ConfigCommon::mqtt_command_timeout_, ConfigCommon::is_clean_session_,

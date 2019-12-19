@@ -23,12 +23,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Configure Compiler flags
 if (UNIX AND NOT APPLE)
+	add_definitions(-DOPENSSL_LOAD_CONF)
     # Prefer pthread if found
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     set(CUSTOM_COMPILER_FLAGS "-fno-exceptions -Wall -Werror")
 elseif (APPLE)
     set(CUSTOM_COMPILER_FLAGS "-fno-exceptions -Wall -Werror")
 elseif (WIN32)
+	add_definitions(-DOPENSSL_LOAD_CONF -D_CRT_SECURE_NO_WARNINGS)
     set(CUSTOM_COMPILER_FLAGS "/W4")
 endif ()
 

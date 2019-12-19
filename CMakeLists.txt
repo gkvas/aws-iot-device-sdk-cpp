@@ -37,6 +37,7 @@ if(UNIX AND NOT APPLE)
 elseif(APPLE)
     set(CUSTOM_COMPILER_FLAGS "-fno-exceptions -Werror -Wall")
 elseif(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 	set(CUSTOM_COMPILER_FLAGS "/W4")
 endif()
 

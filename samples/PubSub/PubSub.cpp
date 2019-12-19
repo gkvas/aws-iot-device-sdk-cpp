@@ -313,6 +313,10 @@ int main(int argc, char **argv) {
     std::unique_ptr<awsiotsdk::samples::PubSub>
         pub_sub = std::unique_ptr<awsiotsdk::samples::PubSub>(new awsiotsdk::samples::PubSub());
 
+#if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)
+	_putenv("OPENSSL_CONF=openssl_sss_a71ch_i2c.cnf");
+#endif
+
     awsiotsdk::ResponseCode rc = awsiotsdk::ConfigCommon::InitializeCommon("config/SampleConfig.json");
     if (awsiotsdk::ResponseCode::SUCCESS == rc) {
         rc = pub_sub->RunSample();
